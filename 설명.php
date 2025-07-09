@@ -23,3 +23,4 @@ Pull Request (PR) 활용: 실제 협업에서는 위와 같은 직접적인 mast
 -> 2명 정도의 작은 규모 팀에서는 Pull Request (PR) 워크플로우가 오히려 불필요한 오버헤드(Overhead)로 느껴질 수 있습니다.
 -> Pair Programming (짝 프로그래밍) 활용 추천
 
+b1 b2 b3 b3...
