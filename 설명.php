@@ -19,7 +19,32 @@ feature/기능_이름, bugfix/버그_내용, hotfix/긴급_수정, refactor/리�
 
 충돌 해결 연습: 협업에서는 충돌이 불가피하게 발생합니다. PhpStorm의 Merge Revision 도구를 사용하여 충돌 해결에 익숙해지는 것이 중요합니다.
 
+
 Pull Request (PR) 활용: 실제 협업에서는 위와 같은 직접적인 master 브랜치 푸시보다는 Pull Request (또는 Merge Request) 워크플로우를 강력히 권장합니다.
 -> 2명 정도의 작은 규모 팀에서는 Pull Request (PR) 워크플로우가 오히려 불필요한 오버헤드(Overhead)로 느껴질 수 있습니다.
 -> Pair Programming (짝 프로그래밍) 활용 추천
 
+
+
+
+파생 브랜치(브랜치에서 또 다른 브랜치) 네이밍 전략
+위의 기본 규칙들을 조합하여 파생 브랜치를 만듭니다. 핵심은 상위 브랜치의 목적을 계승하면서, 하위 브랜치의 상세 목적을 명확히 하는 것입니다.
+
+가장 일반적인 형태: {상위_브랜치_타입}/{상위_브랜치_설명}/{하위_브랜치_타입}/{하위_브랜치_설명}
+
+feature/user-profile 에서 파생:
+
+feature/user-profile/sub-edit-info (하위 기능)
+
+feature/user-profile/bugfix-validation (하위 버그 수정)
+
+feature/user-profile/experimental-avatar-upload (실험적 기능)
+
+
+간소화된 형태 (상위 브랜치 타입이 명확할 때):
+
+feature/user-profile 에서 파생:
+
+feature/user-profile-edit-email
+
+feature/user-profile-add-social-links
