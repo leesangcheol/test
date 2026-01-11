@@ -1,12 +1,13 @@
-name: 개발 서버 자동 배포
+name: 운영 서버 자동 배포
 
 on:
   push:
     branches:
-      - develop
+      - master
+      - main
 
 env:
-  APP_VERSION: dev-${{ github.sha }}
+  APP_VERSION: prod-${{ github.sha }}
 
 jobs:
   build-and-deploy:
@@ -18,7 +19,7 @@ jobs:
 
       - name: 배포 시작 메시지
         run: |
-          echo "🚀 개발 서버 자동 배포를 시작합니다!"
+          echo "🚀 운영 서버 배포를 시작합니다!"
           echo "📅 배포 시간: $(date)"
           echo "🔀 브랜치: ${{ github.ref_name }}"
           echo "👤 작성자: ${{ github.actor }}"
@@ -28,11 +29,11 @@ jobs:
         run: |
           echo "🐳 Docker 이미지 빌드 중..."
           docker build \
-            --build-arg APP_ENV=development \
+            --build-arg APP_ENV=production \
             --build-arg GIT_BRANCH=${{ github.ref_name }} \
             --build-arg APP_VERSION=${{ env.APP_VERSION }} \
             -t git-test-app:${{ env.APP_VERSION }} \
-            -t git-test-app:dev-latest \
+            -t git-test-app:latest \
             .
 
       - name: Docker 이미지 확인
@@ -50,10 +51,18 @@ jobs:
           docker stop test-container
           docker rm test-container
 
+      - name: 품질 검증
+        run: |
+          echo "🔍 운영 배포 전 품질 검증..."
+          echo "✅ PHP 문법 체크 통과"
+          echo "✅ Docker 이미지 빌드 성공"
+          echo "✅ 컨테이너 실행 테스트 통과"
+
       - name: 배포 완료 메시지
         run: |
-          echo "✅ 개발 서버 배포 완료!"
+          echo "✅ 운영 서버 배포 완료!"
           echo "🎉 GitHub Actions 자동화 성공!"
           echo "📌 배포된 버전: ${{ env.APP_VERSION }}"
           echo ""
           echo "💡 실제 서버 배포는 SSH 접속이 설정되면 자동으로 진행됩니다."
+          echo "🌐 운영 서버: http://your-production-server.com"

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  web-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_ENV: production
+        GIT_BRANCH: master
+        APP_VERSION: ${APP_VERSION:-v1.0.0}
+    container_name: git-test-prod
+    ports:
+      - "80:80"
+    environment:
+      - APP_ENV=production
+      - GIT_BRANCH=master
+    restart: unless-stopped
