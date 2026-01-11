@@ -111,9 +111,28 @@ git push origin feature/my-first-pr
 
 ### Step 7: 로컬 정리
 ```bash
-git checkout master  # 또는 develop
-git pull origin master
+# develop 브랜치로 이동
+git checkout develop
+
+# 병합된 최신 코드 가져오기
+git pull origin develop
+
+# 로컬 feature 브랜치 삭제
 git branch -d feature/my-first-pr
+
+# 삭제된 원격 브랜치 참조 정리
+git fetch --prune
+
+# 최종 브랜치 상태 확인
+git branch -a
+```
+
+**예상 결과:**
+```
+* develop
+  master
+  remotes/origin/develop
+  remotes/origin/master
 ```
 
 **🎉 축하합니다! 첫 Pull Request 완료!**
@@ -169,11 +188,19 @@ cat login.php
 
 ```bash
 # 5. 병합된 코드 가져오기
-git checkout master
-git pull origin master
+git checkout develop
+git pull origin develop
+
+# 로컬 브랜치 삭제
 git branch -d feature/add-login
 
-# 확인
+# 삭제된 원격 브랜치 참조 정리
+git fetch --prune
+
+# 브랜치 상태 확인
+git branch -a
+
+# 병합된 파일 확인
 cat login.php  # 개발자B가 병합한 내용 확인!
 ```
 
@@ -258,7 +285,7 @@ name: Hello GitHub Actions
 on:
   push:
     branches:
-      - master
+      - develop
 
 jobs:
   hello:
@@ -280,7 +307,7 @@ EOF
 ```bash
 git add .
 git commit -m "ci: GitHub Actions 테스트"
-git push origin master
+git push origin develop
 ```
 
 **GitHub 웹사이트에서 확인:**
