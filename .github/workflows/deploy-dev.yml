@@ -1,0 +1,41 @@
+name: 개발 서버 자동 배포 테스트
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  test-deployment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 코드 체크아웃
+        uses: actions/checkout@v3
+
+      - name: 배포 시작 메시지
+        run: |
+          echo "🚀 개발 서버 자동 배포를 시작합니다!"
+          echo "📅 배포 시간: $(date)"
+          echo "🔀 브랜치: ${{ github.ref_name }}"
+          echo "👤 작성자: ${{ github.actor }}"
+
+      - name: 파일 목록 확인
+        run: |
+          echo "📁 현재 파일 목록:"
+          ls -la
+
+      - name: PHP 파일 검사
+        run: |
+          echo "🔍 PHP 파일 찾기:"
+          find . -name "*.php" -type f
+
+      - name: 마크다운 파일 확인
+        run: |
+          echo "📝 가이드 문서:"
+          ls -lh *.md 2>/dev/null || echo "마크다운 파일 없음"
+
+      - name: 배포 완료 메시지
+        run: |
+          echo "✅ 개발 서버 배포 완료!"
+          echo "🎉 GitHub Actions 자동화 성공!"
