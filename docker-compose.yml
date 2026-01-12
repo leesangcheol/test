@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  web-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_ENV: development
+        GIT_BRANCH: develop
+        APP_VERSION: ${APP_VERSION:-v1.0.0}
+    container_name: git-test-dev
+    ports:
+      - "9501:80"
+    environment:
+      - APP_ENV=development
+      - GIT_BRANCH=develop
+    restart: unless-stopped
