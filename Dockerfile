@@ -14,7 +14,6 @@ WORKDIR /var/www/html
 
 # 소스 코드 복사
 COPY index.php /var/www/html/
-COPY *.md /var/www/html/ 2>/dev/null || true
 
 # Apache 설정
 RUN chown -R www-data:www-data /var/www/html && \
