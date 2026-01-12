@@ -11,7 +11,7 @@ services:
         APP_VERSION: ${APP_VERSION:-v1.0.0}
     container_name: git-test-dev
     ports:
-      - "8080:80"
+      - "9501:80"
     environment:
       - APP_ENV=development
       - GIT_BRANCH=develop

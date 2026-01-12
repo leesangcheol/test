@@ -43,9 +43,9 @@ jobs:
       - name: Docker 컨테이너 테스트 실행
         run: |
           echo "🧪 컨테이너 테스트 실행 중..."
-          docker run -d --name test-container -p 8080:80 git-test-app:${{ env.APP_VERSION }}
+          docker run -d --name test-container -p 9500:80 git-test-app:${{ env.APP_VERSION }}
           sleep 5
-          curl -f http://localhost:8080 || exit 1
+          curl -f http://localhost:9500 || exit 1
           echo "✅ 컨테이너 테스트 성공!"
           docker stop test-container
           docker rm test-container
